@@ -39,13 +39,13 @@
     <el-button type="primary" @click='train'>开启模型预训练</el-button>
     <br/>
     <br/>
-    <el-button type="text" @click="dialogVisiable = true">查看模型诊断结果</el-button>
+    <el-button type="text" @click="dialogVisible = true">查看模型诊断结果</el-button>
     <br/>
     <br/>
     <br/>
     <br/>
     <br/>
-    <el-dialog title="提示" :visible.sync="dialogVisiable" width="70%" center>
+    <el-dialog title="提示" :visible.sync="dialogVisible" width="70%" center>
       模型诊断及优化结果：
       <br/>
       <br/>
