@@ -43,7 +43,7 @@
       <!-- 下载数据模板 -->
       <div class="div-label"><label>上传标注之前请先下载<span
         style="font-weight: bold">需要标注的图片</span></label></div>
-      <el-button @click="download" class="el-button-color add-button-box" size="medium"
+      <el-button @click="download1" class="el-button-color add-button-box" size="medium"
                  type="primary">
         <i class="el-icon-download el-icon--right"></i>下载需要标注的图片
       </el-button>
@@ -56,13 +56,13 @@
     </el-upload>
     <br/>
     <br/>
-    <el-button type="primary" disabled>开启模型优化训练</el-button>
+    <el-button type="primary"  @click='train_doctor'>开启模型优化训练</el-button>
     <br/>
     <br/>
     <template>
       下载模型优化结果
 
-      <el-button @click="download" class="el-button-color add-button-box" size="medium"
+      <el-button @click="download2" class="el-button-color add-button-box" size="medium"
                  type="primary">
         <i class="el-icon-download el-icon--right"></i>下载优化后的模型权重
       </el-button>
@@ -77,14 +77,25 @@
 </style>
 
 <script>
-    export default {
-        data() {
-            return {
-                kernel_radio: '1',
-                background_radio: '1',
-                route_radio: '1',
-                layers: "1",
-            }
-        }
+  export default {
+    data() {
+      return {
+          kernel_radio: '1',
+          background_radio: '1',
+          route_radio: '1',
+          layers: "1",
+      }
+    },
+    methods: {
+      train_doctor() {
+        this.axios.post("/modeldoctor/task/step2", {
+          'data_id':localStorage.getItem('datasetID'),
+          'model_id':localStorage.getItem('modelID')
+        }, {}).then(response => {
+
+        });
+      }
     }
+
+  }
 </script>

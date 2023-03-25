@@ -54,6 +54,8 @@ export default {
   methods: {
     getData() {
       this.axios.get("/modeldoctor/dataset", {}, {}).then(response => {
+        console.log(response.data)
+
         this.tableData = response.data;
       });
     },
