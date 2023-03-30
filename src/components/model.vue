@@ -4,7 +4,7 @@
       <el-col :span="18">
         <el-steps :active="1" align-center>
           <el-step title="步骤 1" description="上传model.py文件"></el-step>
-          <el-step title="步骤 2" description="选择表格中的一行模型项，作为模型诊断用的模型"></el-step>
+          <el-step title="步骤 2" description="选择表格的一行作为模型诊断用的模型"></el-step>
           <el-step title="步骤 3" description="完成步骤1和2后点击任务页面，开始模型诊断与治疗"></el-step>
         </el-steps>
       </el-col>

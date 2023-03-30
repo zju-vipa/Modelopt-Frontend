@@ -5,7 +5,7 @@
       <el-step title="步骤 2" description="点击下载可以下载对应任务的模型优化后的权重"></el-step>
     </el-steps>
 
-    <el-table :data="tableData" style="width: 100%">
+    <el-table :data="tableData" style="width: 100%;margin-top: 20px">
       <el-table-column prop="id" label="id">
       </el-table-column>
       <el-table-column prop="date" label="创建时间" width="180">

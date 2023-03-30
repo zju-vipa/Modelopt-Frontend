@@ -13,6 +13,8 @@ import diagnose from '@/components/diagnose'
 import treat from '@/components/treat'
 import historyTask from '@/components/historyTask'
 import index from '@/components/index'
+import Login from "@/components/login";
+import Register from "@/components/register";
 
 Vue.use(Router)
 
@@ -20,7 +22,21 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: "/",
+      redirect: "/login"
+    },
+    {
+      path: "/register",
+      name: "Register",
+      component: Register
+    },
+    {
+      path: "/login",
+      name: "Login",
+      component: Login
+    },
+    {
+      path: '/index',
       name: 'index',
       component: index,
       redirect: '/dataset',

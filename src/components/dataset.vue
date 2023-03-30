@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div>
     <el-row :gutter="20">
       <el-col :span="20">
         <el-steps :active="1" align-center>
@@ -14,8 +14,8 @@
       </el-col>
     </el-row>
 
-    <el-table :data="tableData">
-      <el-table-column prop="id" label="id">
+    <el-table :data="tableData" style="margin-top: 40px">
+      <el-table-column prop="id" label="id" style="text-align: center">
       </el-table-column>
       <el-table-column prop="time" label="生成日期">
       </el-table-column>
