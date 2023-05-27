@@ -7,19 +7,19 @@
       <el-form-item prop="username">
         <el-input clearable  v-model="registerForm.username" placeholder="请输入账号" style="width:350px"></el-input>
       </el-form-item>
-      <el-form-item prop="password">
+      <el-form-item prop="old_password">
         <el-input clearable type="password" v-model="registerForm.password" placeholder="请输入密码" style="width:350px"></el-input>
       </el-form-item>
-      <el-form-item prop="email">
-        <el-input clearable v-model="registerForm.email" placeholder="请输入邮箱" style="width:350px"></el-input>
+      <el-form-item prop="new_password">
+        <el-input clearable type="password" v-model="registerForm.password" placeholder="请输入密码" style="width:350px"></el-input>
       </el-form-item>
       <el-form-item>
         <el-row>
           <el-col :span="12">
-            <el-button  type="primary" @click="submitRegister" style="width:160px">注册</el-button>
+            <el-button  type="primary" @click="submitMotify" style="width:160px">修改</el-button>
           </el-col>
           <el-col :span="12">
-            <el-button type="primary" @click="gotoLogin" style="width:170px" >登录</el-button>
+            <el-button type="primary" @click="cancel" style="width:170px" >取消</el-button>
           </el-col>
         </el-row>
       </el-form-item>
@@ -59,22 +59,16 @@ export default {
     submitRegister () {
       this.$refs.registerFormRef.validate(valid => {
         if (valid) {
-          this.axios.post("/register", {
-            'name':this.registerForm.username,
-            'password':this.registerForm.password,
-            'email':this.registerForm.email
-          }, {}).then(response => {
+          // this.$router.push('/login')
+          registerApi.register(this.registerForm).then(response => {
             const resp = response.data
-            console.log(resp)
-            if (resp == '1') {
+            if (resp.meta.code === 200) {
               this.$message.success('注册成功')
               this.$router.push('/login')
             } else {
               this.$message.error('注册失败')
             }
-          });
-          
-
+          })
         } else {
           return false
         }

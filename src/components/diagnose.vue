@@ -66,45 +66,25 @@
     </el-row>
 
     <el-dialog title="提示" :visible.sync="dialogVisible" width="70%" center>
-      模型诊断及优化结果：
-      <br/>
-      <br/>
-      样本特征使用错误分析：
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      路径走错分析：
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-
+      <el-row>
+        模型诊断及优化结果：
+      </el-row>
+      <el-row>
+        <img :src="'data:image/png;base64,'+ images.channel" alt="无效" width="1200px" height="200px" />
+      </el-row>
+      <el-row>样本特征使用错误分析：</el-row>
+      <el-row>输入样例图：</el-row>
+      <el-row>
+        <img :src="'data:image/png;base64,'+ images.origin" alt="无效" width="300px" />
+      </el-row>
+      <el-row>样例图注意力可视化：</el-row>
+      <el-row>
+        <img :src="'data:image/png;base64,'+ images.cam" alt="无效" width="300px" />
+      </el-row>
+      <el-row>样本路径分析：</el-row>
+      <el-row>
+        <img :src="'data:image/png;base64,'+ images.route" alt="无效" width="300px" />
+      </el-row>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -137,6 +117,12 @@ export default {
       button: "开启模型诊断",
       button_loading: false,
       button_download: false,
+      images:{
+        channel: '',
+        cam: '',
+        origin: '',
+        route: ''
+      }
     }
   },
   methods: {
@@ -146,8 +132,20 @@ export default {
       this.axios.post("/modeldoctor/task/step1", {
         'data_id':localStorage.getItem('datasetID'),
         'model_id':localStorage.getItem('modelID')
-      }, {}).then(response => {
-
+      }, {}).then(res => {
+        console.log(res)
+        console.log(res.data)
+        console.log(res.data['result'])
+        console.log(res.data['result']['channel'])
+        console.log(res.data['result']['origin'])
+        console.log(res.data['result']['cam'])
+        this.images.channel=res.data['result']['channel']
+        this.images.origin=res.data['result']['origin']
+        this.images.cam=res.data['result']['cam']
+        this.images.route=res.data['result']['route']
+        this.button_loading=false
+        this.button_download=true
+        this.button = "开启模型诊断"
       });
     }
   }

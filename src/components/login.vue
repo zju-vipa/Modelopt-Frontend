@@ -50,20 +50,20 @@ export default {
     submitLogin () {
       this.$refs.loginFormRef.validate(valid => {
         if (valid) {
-          // console.log(this.loginForm)
-          // loginApi.login(this.loginForm).then(response => {
-          //   const resp = response.data
-          //   if (resp.meta.code === 200) {
-          //     // 将用户信息保存到浏览器缓存
-          //     localStorage.setItem('user', JSON.stringify(resp.data))
-          //     localStorage.setItem('token', JSON.stringify(resp.data.token))
-          //     // this.$message.success('登录成功')
-          //     this.$router.push('/layout')
-          //   } else {
-          //     this.$message.error('登录失败')
-          //   }
-          // })
-          this.$router.push({ path: '/index', query: { username: this.loginForm.username} })
+          this.axios.post("/login", {
+            'name':this.loginForm.username,
+            'password':this.loginForm.password
+          }, {}).then(response => {
+            const resp = response.data
+            console.log(resp)
+            if (resp == '1') {
+              this.$message.success('登录成功')
+              this.$router.push({ path: '/index', query: { username: this.loginForm.username} })
+            } else {
+              this.$message.error('登录失败')
+            }
+          });
+
         } else {
           return false
         }

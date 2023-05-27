@@ -108,12 +108,23 @@
               if (command === 'exit') {
                 // 退出系统
                 this.handleExit()
-              } else {
+              } else if (command === 'update'){
+                this.handleUpdate()
+              }
+              else {
                 // this.handleUpdatePass()
               }
             },
             // // 退出系统
             handleExit () {
+              // 1, 获取系统的token
+              // const token = JSON.parse(localStorage.getItem('token'))
+              localStorage.removeItem('token')
+              localStorage.removeItem('user')
+              this.$router.push('/login')
+            },
+            // // 修改密码
+            handleUpdate () {
               // 1, 获取系统的token
               // const token = JSON.parse(localStorage.getItem('token'))
               localStorage.removeItem('token')
